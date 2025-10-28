@@ -26,6 +26,13 @@ const LoanApplicationForm = ({
   const urlParams = getURLParams();
   const [currentLoanType, setCurrentLoanType] = useState(urlParams.loanType);
 
+  // Helper function to get default due date (end of next month)
+  const getDefaultDueDate = () => {
+    const now = new Date();
+    const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    return nextMonth.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+  };
+
   const [formData, setFormData] = useState({
     amount: urlParams.amount,
     name: '',
@@ -33,6 +40,7 @@ const LoanApplicationForm = ({
     idNumber: '',
     phone: '',
     email: '',
+    dueDate: getDefaultDueDate(),
     terms: false,
     loanType: currentLoanType === 'unsecured' ? 'Unsecured Loan' : 'Secured Loan'
   });
@@ -55,7 +63,8 @@ const LoanApplicationForm = ({
       ...prev,
       amount: params.amount,
       loanType: params.loanType === 'unsecured' ? 'Unsecured Loan' : 'Secured Loan',
-      surname: params.loanType === 'unsecured' ? (prev.surname || '') : undefined
+      surname: params.loanType === 'unsecured' ? (prev.surname || '') : undefined,
+      dueDate: prev.dueDate || getDefaultDueDate() // Keep existing date or set default
     }));
   }, [window.location.search]);
 
@@ -91,14 +100,17 @@ const LoanApplicationForm = ({
     });
   };
 
-  const getEndOfMonth = () => {
-    const now = new Date();
-    const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-    return lastDay.toLocaleDateString('en-ZA', {
+  const formatDateForDisplay = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-ZA', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
     });
+  };
+
+  const getEndOfMonth = () => {
+    return formatDateForDisplay(formData.dueDate);
   };
 
   const saveToLocalStorage = (payload) => {
@@ -131,7 +143,7 @@ const LoanApplicationForm = ({
     
     // Try simple date formats that might work better with the server
     const startDate = `${year}-${month}-${day}`;
-    const dueDate = getEndOfMonth();
+    const dueDate = formData.dueDate; // Use the selected due date
     
     // Try a simpler datetime format
     const applicationDateTime = `${year}-${month}-${day}T${String(today.getHours()).padStart(2, '0')}:${String(today.getMinutes()).padStart(2, '0')}:${String(today.getSeconds()).padStart(2, '0')}.000Z`;
@@ -258,6 +270,7 @@ const LoanApplicationForm = ({
           idNumber: '',
           phone: '',
           email: '',
+          dueDate: getDefaultDueDate(),
           terms: false,
           loanType: currentLoanType === 'unsecured' ? 'Unsecured Loan' : 'Secured Loan'
         });
@@ -365,6 +378,21 @@ const LoanApplicationForm = ({
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="dueDate">Select Due Date</label>
+          <input
+            type="date"
+            id="dueDate"
+            name="dueDate"
+            value={formData.dueDate}
+            onChange={handleInputChange}
+            className="form-control date-picker"
+            required
+            min={new Date().toISOString().split('T')[0]} // Today's date as minimum
+          />
+          <small className="form-text">Choose your preferred loan repayment date</small>
         </div>
 
         <div className="form-group">
