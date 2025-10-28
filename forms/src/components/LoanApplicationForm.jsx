@@ -3,22 +3,38 @@ import TermsAndConditions from './TermsAndConditions';
 import './LoanApplicationForm.css';
 
 const LoanApplicationForm = ({ 
-  loanType = 'unsecured', 
-  initialAmount = '', 
+  loanType: propLoanType = 'unsecured', 
+  initialAmount: propInitialAmount = '', 
   apiEndpoint = 'https://cashflow-crm.onrender.com/api/clients',
   onSuccess,
   onError,
   useLocalStorage = false  // Add option to use local storage as backup
 }) => {
+  // Function to read URL parameters
+  const getURLParams = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const type = urlParams.get('type');
+    const amount = urlParams.get('amount');
+    
+    return {
+      loanType: type || propLoanType,
+      amount: amount || propInitialAmount || '500'
+    };
+  };
+
+  // Initialize state with URL parameters
+  const urlParams = getURLParams();
+  const [currentLoanType, setCurrentLoanType] = useState(urlParams.loanType);
+
   const [formData, setFormData] = useState({
-    amount: initialAmount || '500',
+    amount: urlParams.amount,
     name: '',
-    surname: loanType === 'unsecured' ? '' : undefined,
+    surname: currentLoanType === 'unsecured' ? '' : undefined,
     idNumber: '',
     phone: '',
     email: '',
     terms: false,
-    loanType: loanType === 'unsecured' ? 'Unsecured Loan' : 'Secured Loan'
+    loanType: currentLoanType === 'unsecured' ? 'Unsecured Loan' : 'Secured Loan'
   });
 
   const [files, setFiles] = useState({
@@ -31,11 +47,17 @@ const LoanApplicationForm = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
 
+  // Update form when URL parameters change
   useEffect(() => {
-    if (initialAmount) {
-      setFormData(prev => ({ ...prev, amount: initialAmount }));
-    }
-  }, [initialAmount]);
+    const params = getURLParams();
+    setCurrentLoanType(params.loanType);
+    setFormData(prev => ({
+      ...prev,
+      amount: params.amount,
+      loanType: params.loanType === 'unsecured' ? 'Unsecured Loan' : 'Secured Loan',
+      surname: params.loanType === 'unsecured' ? (prev.surname || '') : undefined
+    }));
+  }, [window.location.search]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -232,12 +254,12 @@ const LoanApplicationForm = ({
         setFormData({
           amount: '',
           name: '',
-          surname: loanType === 'unsecured' ? '' : undefined,
+          surname: currentLoanType === 'unsecured' ? '' : undefined,
           idNumber: '',
           phone: '',
           email: '',
           terms: false,
-          loanType: loanType === 'unsecured' ? 'Unsecured Loan' : 'Secured Loan'
+          loanType: currentLoanType === 'unsecured' ? 'Unsecured Loan' : 'Secured Loan'
         });
         setFiles({
           payslip: null,
@@ -271,7 +293,7 @@ const LoanApplicationForm = ({
     <div className="loan-application-container">
       <div className="loan-application-form">
         <h2 className="form-title">
-          {loanType === 'unsecured' ? 'Unsecured' : 'Secured'} Loan Application
+          {currentLoanType === 'unsecured' ? 'Unsecured' : 'Secured'} Loan Application
         </h2>
       
       <form onSubmit={handleSubmit} className="loan-form">
@@ -285,7 +307,7 @@ const LoanApplicationForm = ({
                   type="range"
                   id="amount-slider"
                   min="100"
-                  max={loanType === 'unsecured' ? '10000' : '100000'}
+                  max={currentLoanType === 'unsecured' ? '10000' : '100000'}
                   step="10"
                   value={formData.amount || 500}
                   onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
@@ -293,7 +315,7 @@ const LoanApplicationForm = ({
                 />
                 <div className="slider-labels">
                   <span>R100</span>
-                  <span>{loanType === 'unsecured' ? 'R10,000' : 'R100,000'}</span>
+                  <span>{currentLoanType === 'unsecured' ? 'R10,000' : 'R100,000'}</span>
                 </div>
               </div>
               <div className="amount-input-wrapper">
@@ -307,7 +329,7 @@ const LoanApplicationForm = ({
                   className="form-control amount-input"
                   required
                   min="100"
-                  max={loanType === 'unsecured' ? '10000' : '100000'}
+                  max={currentLoanType === 'unsecured' ? '10000' : '100000'}
                   step="1"
                 />
               </div>
@@ -358,7 +380,7 @@ const LoanApplicationForm = ({
           />
         </div>
 
-        {loanType === 'unsecured' && (
+        {currentLoanType === 'unsecured' && (
           <div className="form-group">
             <label htmlFor="surname">Surname</label>
             <input
@@ -415,7 +437,7 @@ const LoanApplicationForm = ({
           />
         </div>
 
-        {loanType === 'unsecured' && (
+        {currentLoanType === 'unsecured' && (
           <>
             <div className="form-group">
               <label htmlFor="payslip">Payslip</label>
@@ -461,7 +483,7 @@ const LoanApplicationForm = ({
           </>
         )}
 
-        {loanType === 'secured' && (
+        {currentLoanType === 'secured' && (
           <div className="form-group">
             <label htmlFor="collateralImages">Collateral Images</label>
             <div className="file-upload">
