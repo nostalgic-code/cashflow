@@ -1,0 +1,521 @@
+/* LoanApplicationForm.css */
+:root {
+  --money-green: #1b4d3e;
+  --light-money-green: #2e8b57;
+  --pale-money-green: #98c9a3;
+  --money-dark-green: #45a049;
+}
+
+/* Reset and ensure full height */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.loan-application-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100%;
+  width: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background: #f8f9fa;
+}
+
+.loan-application-form {
+  max-width: 600px;
+  width: 100%;
+  padding: 40px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  margin: 0 auto;
+}
+
+.form-title {
+  color: var(--money-green);
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.loan-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--money-green);
+  box-shadow: 0 0 0 2px rgba(27, 77, 62, 0.1);
+}
+
+.form-control:invalid {
+  border-color: #dc3545;
+}
+
+.form-control select {
+  cursor: pointer;
+}
+
+.form-control textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group-half {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.file-upload {
+  border: 2px dashed #ddd;
+  padding: 20px;
+  text-align: center;
+  border-radius: 4px;
+  background: #f9f9f9;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.file-upload:hover {
+  border-color: var(--money-green);
+  background: #f0f9f0;
+}
+
+.file-upload input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.file-help-text {
+  margin-top: 10px;
+  color: #666;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.terms-group {
+  margin-top: 30px;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background: #fff;
+  border: 2px solid var(--money-green);
+  border-radius: 8px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.checkbox-wrapper:hover {
+  box-shadow: 0 4px 12px rgba(27, 77, 62, 0.1);
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--money-green);
+  flex-shrink: 0;
+}
+
+.checkbox-wrapper label {
+  margin: 0;
+  cursor: pointer;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.submit-btn {
+  background: var(--money-green);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--money-dark-green);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message.success {
+  border-color: #28a745;
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.message.error {
+  border-color: #dc3545;
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.message pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Loan Calculator Styles - Modern Minimalistic */
+.loan-calculator-section {
+  margin-bottom: 2rem;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  color: #333;
+}
+
+.calculator-title {
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+}
+
+.calculator-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.amount-slider-container {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.amount-slider-container label {
+  display: block;
+  margin-bottom: 2rem;
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.slider-wrapper {
+  margin-bottom: 2rem;
+}
+
+.loan-slider {
+  width: 100%;
+  height: 2px;
+  border-radius: 0;
+  background: #e5e5e5;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.loan-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+}
+
+.loan-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.loan-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: 400;
+}
+
+.amount-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 0;
+  font-weight: 400;
+  color: #999;
+  z-index: 1;
+  font-size: 1.2rem;
+}
+
+.amount-input {
+  padding-left: 25px !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #e5e5e5 !important;
+  border-radius: 0 !important;
+  font-size: 1.8rem !important;
+  font-weight: 300 !important;
+  color: #1a1a1a !important;
+  transition: all 0.2s ease !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.amount-input:focus {
+  border-bottom-color: #1a1a1a !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.loan-breakdown {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  color: #333;
+}
+
+.loan-breakdown h4 {
+  margin-bottom: 2rem;
+  text-align: left;
+  color: #666;
+  font-weight: 400;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.breakdown-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1rem;
+  transition: none;
+}
+
+.breakdown-item:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.breakdown-item.highlight {
+  background: none;
+  color: #1a1a1a;
+  font-weight: 400;
+  box-shadow: none;
+  border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 0.75rem;
+}
+
+.breakdown-label {
+  font-weight: 400;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.breakdown-value {
+  font-weight: 300;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.breakdown-item.highlight .breakdown-label {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.breakdown-item.highlight .breakdown-value {
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+/* Calculator Responsive Design */
+@media (max-width: 1024px) {
+  .calculator-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .calculator-container {
+    gap: 2rem;
+  }
+
+  .calculator-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .amount-input {
+    font-size: 1.5rem !important;
+  }
+
+  .breakdown-grid {
+    gap: 1rem;
+  }
+
+  .breakdown-item {
+    padding-bottom: 0.75rem;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .loan-application-container {
+    padding: 10px;
+    min-height: 100vh;
+  }
+  
+  .loan-application-form {
+    padding: 25px;
+  }
+  
+  .form-title {
+    font-size: 20px;
+  }
+  
+  .form-control {
+    padding: 10px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .form-group-half {
+    margin-bottom: 20px;
+  }
+  
+  .submit-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .terms-text {
+    max-height: 250px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loan-application-container {
+    padding: 5px;
+  }
+  
+  .loan-application-form {
+    padding: 20px;
+  }
+  
+  .checkbox-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .checkbox-wrapper input[type="checkbox"] {
+    align-self: flex-start;
+  }
+}
