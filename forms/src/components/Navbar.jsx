@@ -7,12 +7,35 @@ const Navbar = () => {
     const mobileNavTogglers = document.querySelectorAll('.mobile-nav__toggler');
     const mobileNavWrapper = document.querySelector('.mobile-nav__wrapper');
     
-    const handleToggle = (e) => {
-      e.preventDefault();
-      mobileNavWrapper?.classList.toggle('expanded');
-      document.body.classList.toggle('active');
+    const openMenu = () => {
+      if (mobileNavWrapper) {
+        mobileNavWrapper.classList.add('expanded');
+        document.body.classList.add('active');
+        console.log('Menu opened');
+      }
     };
 
+    const closeMenu = () => {
+      if (mobileNavWrapper) {
+        mobileNavWrapper.classList.remove('expanded');
+        document.body.classList.remove('active');
+        console.log('Menu closed');
+      }
+    };
+
+    const handleToggle = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('Hamburger clicked!');
+      
+      if (mobileNavWrapper && mobileNavWrapper.classList.contains('expanded')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
+
+    // Add click event to hamburger buttons
     mobileNavTogglers.forEach(toggler => {
       toggler.addEventListener('click', handleToggle);
     });
@@ -20,26 +43,40 @@ const Navbar = () => {
     // Close menu when clicking overlay
     const mobileNavOverlay = document.querySelector('.mobile-nav__overlay');
     if (mobileNavOverlay) {
-      mobileNavOverlay.addEventListener('click', () => {
-        mobileNavWrapper?.classList.remove('expanded');
-        document.body.classList.remove('active');
+      mobileNavOverlay.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Overlay clicked');
+        closeMenu();
       });
     }
 
     // Close menu when clicking close button
     const mobileNavClose = document.querySelector('.mobile-nav__close');
     if (mobileNavClose) {
-      mobileNavClose.addEventListener('click', () => {
-        mobileNavWrapper?.classList.remove('expanded');
-        document.body.classList.remove('active');
+      mobileNavClose.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Close button clicked');
+        closeMenu();
       });
     }
+
+    // Close menu when pressing Escape key
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && mobileNavWrapper && mobileNavWrapper.classList.contains('expanded')) {
+        closeMenu();
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscape);
 
     // Cleanup event listeners
     return () => {
       mobileNavTogglers.forEach(toggler => {
         toggler.removeEventListener('click', handleToggle);
       });
+      document.removeEventListener('keydown', handleEscape);
     };
   }, []);
   return (
@@ -72,8 +109,9 @@ const Navbar = () => {
               <a href="https://www.cashflowloans.co.za/index.html" aria-label="logo image" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                 <img src="/assets/images/logo.jpeg" width="100" alt="Cashflow Loans Logo" style={{ borderRadius: '50%' }} />
               </a>
-              <span className="fa fa-bars mobile-nav__toggler"></span>
             </div>
+            
+            <span className="fa fa-bars mobile-nav__toggler"></span>
             
             <ul className="main-menu__list">
               <li><a href="https://www.cashflowloans.co.za/index.html">Home</a></li>
@@ -106,11 +144,11 @@ const Navbar = () => {
       <div className="mobile-nav__wrapper">
         <div className="mobile-nav__overlay mobile-nav__toggler"></div>
         <div className="mobile-nav__content">
-          <span className="mobile-nav__close mobile-nav__toggler"></span>
+          <button className="mobile-nav__close mobile-nav__toggler" type="button" aria-label="Close menu">×</button>
           
           <div className="logo-box">
             <a href="https://www.cashflowloans.co.za/index.html" aria-label="logo image" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textDecoration: 'none' }}>
-              <img src="/assets/images/logo.jpeg" width="100" alt="Cashflow Loans Logo" style={{ borderRadius: '50%' }} />
+              <img src="/assets/images/logo.jpeg" width="80" alt="Cashflow Loans Logo" style={{ borderRadius: '50%' }} />
             </a>
           </div>
           
