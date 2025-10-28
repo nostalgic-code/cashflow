@@ -381,7 +381,7 @@ const LoanApplicationForm = ({
         </div>
 
         <div className="form-group">
-          <label htmlFor="dueDate">Select Due Date</label>
+          <label htmlFor="dueDate">Repayment Date</label>
           <input
             type="date"
             id="dueDate"
