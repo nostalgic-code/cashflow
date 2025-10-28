@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="row justify-content-between">
             <div className="col-lg-3 col-sm-6">
               <div className="footer-widget footer-widget__about">
-                <a href="/index.html" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textDecoration: 'none' }}>
+                <a href="https://www.cashflowloans.co.za/index.html" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textDecoration: 'none' }}>
                   <img src="/assets/images/logo.jpeg" width="100" alt="Cashflow Loans Logo" style={{ borderRadius: '50%' }} />
                   <h6 style={{ margin: '10px 0', color: 'white' }}>cashflowloans</h6>
                 </a>
@@ -28,11 +28,11 @@ const Footer = () => {
               <div className="footer-widget footer-widget__link">
                 <h3 className="footer-widget__title">Explore</h3>
                 <ul className="list-unstyled footer-widget__link-list">
-                  <li><a href="/about.html"><i className="fa fa-arrow-right"></i>About</a></li>
-                  <li><a href="/services.html"><i className="fa fa-arrow-right"></i>Our Services</a></li>
-                  <li><a href="/news.html"><i className="fa fa-arrow-right"></i>Latest News</a></li>
-                  <li><a href="/contact.html"><i className="fa fa-arrow-right"></i>Contact</a></li>
-                  <li><a href="https://cashflow-crm.onrender.com/apply-for-loan.html"><i className="fa fa-arrow-right"></i>Apply for Loan</a></li>
+                  <li><a href="https://www.cashflowloans.co.za/about.html"><i className="fa fa-arrow-right"></i>About</a></li>
+                  <li><a href="https://www.cashflowloans.co.za/services.html"><i className="fa fa-arrow-right"></i>Our Services</a></li>
+                  <li><a href="https://www.cashflowloans.co.za/news.html"><i className="fa fa-arrow-right"></i>Latest News</a></li>
+                  <li><a href="https://www.cashflowloans.co.za/contact.html"><i className="fa fa-arrow-right"></i>Contact</a></li>
+                  <li><a href="https://loan-forms.vercel.app/"><i className="fa fa-arrow-right"></i>Apply for Loan</a></li>
                 </ul>
               </div>
             </div>
@@ -45,14 +45,14 @@ const Footer = () => {
                     <img src="/assets/images/img5.jpeg" alt="" style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} />
                     <div className="footer-widget__post-list-content">
                       <span>7 Aug, 2025</span>
-                      <h3><a href="/blog/avoid-debt-spiral.html">How to avoid the debt spiral</a></h3>
+                      <h3><a href="https://www.cashflowloans.co.za/blog/avoid-debt-spiral.html">How to avoid the debt spiral</a></h3>
                     </div>
                   </li>
                   <li>
                     <img src="/assets/images/img6.jpeg" alt="" style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} />
                     <div className="footer-widget__post-list-content">
                       <span>7 Aug, 2025</span>
-                      <h3><a href="/blog/needs-vs-wants.html">Needs vs wants</a></h3>
+                      <h3><a href="https://www.cashflowloans.co.za/blog/needs-vs-wants.html">Needs vs wants</a></h3>
                     </div>
                   </li>
                 </ul>

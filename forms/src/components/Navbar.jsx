@@ -17,10 +17,10 @@ const Navbar = () => {
                   <i className="fab fa-instagram"></i>
                 </a>
               </div>
-              <a href="/news.html">Company News</a>
+              <a href="https://www.cashflowloans.co.za/news.html">Company News</a>
             </div>
             <div className="topbar__right">
-              <a href="#"><i className="pylon-icon-email1"></i>info@cashflowloans.co.za</a>
+              <a href="mailto:info@cashflowloans.co.za"><i className="pylon-icon-email1"></i>info@cashflowloans.co.za</a>
               <a href="#"><i className="pylon-icon-clock2"></i>Mon - Sat 8:00 AM - 17:00 PM</a>
             </div>
           </div>
@@ -29,23 +29,24 @@ const Navbar = () => {
         <nav className="main-menu">
           <div className="container">
             <div className="logo-box">
-              <a href="/index.html" aria-label="logo image" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <a href="https://www.cashflowloans.co.za/index.html" aria-label="logo image" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                 <img src="/assets/images/logo.jpeg" width="100" alt="Cashflow Loans Logo" style={{ borderRadius: '50%' }} />
               </a>
               <span className="fa fa-bars mobile-nav__toggler"></span>
             </div>
             
             <ul className="main-menu__list">
-              <li><a href="/index.html">Home</a></li>
-              <li><a href="/about.html">About Us</a></li>
+              <li><a href="https://www.cashflowloans.co.za/index.html">Home</a></li>
+              <li><a href="https://www.cashflowloans.co.za/about.html">About Us</a></li>
               <li className="dropdown">
-                <a href="https://cashflow-crm.onrender.com/apply-for-loan.html">Apply Now</a>
+                <a href="#" onClick={(e) => e.preventDefault()}>Apply Now</a>
                 <ul>
-                  <li><a href="https://cashflow-crm.onrender.com/apply-for-loan.html">Apply For Loan</a></li>
+                  <li><a href="https://loan-forms.vercel.app/?type=unsecured">Unsecured Loan</a></li>
+                  <li><a href="https://loan-forms.vercel.app/?type=secured">Secured Loan</a></li>
                 </ul>
               </li>
-              <li><a href="/news.html">News</a></li>
-              <li><a href="/contact.html">Contact Us</a></li>
+              <li><a href="https://www.cashflowloans.co.za/news.html">News</a></li>
+              <li><a href="https://www.cashflowloans.co.za/contact.html">Contact Us</a></li>
             </ul>
             
             <div className="main-header__info">
