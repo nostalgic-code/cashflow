@@ -17,6 +17,7 @@ CORS(app,
     origins=[
         'https://www.cashflowloans.co.za',
         'https://cashflowloans.co.za',
+        'https://loan-forms.vercel.app',
         'http://localhost:3000',
         'http://127.0.0.1:5000'
     ],

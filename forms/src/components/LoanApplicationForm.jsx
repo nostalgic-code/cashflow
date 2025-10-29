@@ -130,7 +130,7 @@ const LoanApplicationForm = ({
     }
   };
 
-  const submitToCRM = async (formData, loanType) => {
+  const submitToCRM = async (formData, loanType, uploadedFiles) => {
     const fullName = loanType === 'Unsecured Loan' 
       ? `${formData.name} ${formData.surname || ''}`.trim()
       : formData.name;
@@ -147,6 +147,58 @@ const LoanApplicationForm = ({
     
     // Try a simpler datetime format
     const applicationDateTime = `${year}-${month}-${day}T${String(today.getHours()).padStart(2, '0')}:${String(today.getMinutes()).padStart(2, '0')}:${String(today.getSeconds()).padStart(2, '0')}.000Z`;
+
+    // Process uploaded files into documents array
+    const documents = [];
+    
+    // For unsecured loans
+    if (uploadedFiles.payslip) {
+      documents.push({
+        id: generateUUID(),
+        type: 'payslip',
+        name: uploadedFiles.payslip.name,
+        size: uploadedFiles.payslip.size,
+        uploadDate: applicationDateTime,
+        status: 'uploaded'
+      });
+    }
+    
+    if (uploadedFiles.idDocument) {
+      documents.push({
+        id: generateUUID(),
+        type: 'id_document',
+        name: uploadedFiles.idDocument.name,
+        size: uploadedFiles.idDocument.size,
+        uploadDate: applicationDateTime,
+        status: 'uploaded'
+      });
+    }
+    
+    if (uploadedFiles.bankStatement) {
+      documents.push({
+        id: generateUUID(),
+        type: 'bank_statement',
+        name: uploadedFiles.bankStatement.name,
+        size: uploadedFiles.bankStatement.size,
+        uploadDate: applicationDateTime,
+        status: 'uploaded'
+      });
+    }
+    
+    // For secured loans - collateral images
+    if (uploadedFiles.collateralImages && Array.isArray(uploadedFiles.collateralImages)) {
+      uploadedFiles.collateralImages.forEach((file, index) => {
+        documents.push({
+          id: generateUUID(),
+          type: 'collateral_image',
+          name: file.name,
+          size: file.size,
+          uploadDate: applicationDateTime,
+          status: 'uploaded',
+          imageIndex: index + 1
+        });
+      });
+    }
 
     const payload = {
       id: generateUUID(),
@@ -166,10 +218,14 @@ const LoanApplicationForm = ({
       amountPaid: 0,
       paymentHistory: [],
       notes: [],
-      documents: []
+      documents: documents
     };
 
-    console.log('Submitting to CRM with fixed date format:', payload);
+    console.log('📁 Files state before processing:', uploadedFiles);
+    console.log('�📋 Documents processed:', documents.length, 'files');
+    console.log('📄 Document details:', documents);
+    console.log('📤 Full payload being sent:', payload);
+    console.log('🔍 Payload.documents specifically:', payload.documents);
 
     try {
       const response = await fetch(apiEndpoint, {
@@ -235,7 +291,7 @@ const LoanApplicationForm = ({
     setMessage('');
 
     try {
-      const result = await submitToCRM(formData, formData.loanType);
+      const result = await submitToCRM(formData, formData.loanType, files);
       
       if (result.success) {
         const loanAmount = result.data.loanAmount || parseFloat(formData.amount);
